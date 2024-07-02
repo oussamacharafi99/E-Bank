@@ -23,18 +23,18 @@ public class Transaction {
     private Integer id;
 
     @ManyToOne
-    @Column()
+    @JoinColumn
     private Compte compte;
 
     @ManyToOne
-    @JoinColumn()
+    @JoinColumn
     private Beneficier beneficier;
 
-    @Column()
+    @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date transactionDate;
 
-    @Column()
+    @Column
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime transactionTimer;
 
@@ -49,7 +49,5 @@ public class Transaction {
 
     @Column
     private String bank_transaction;
-
-
 
 }

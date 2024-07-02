@@ -15,11 +15,12 @@ import java.util.List;
 @Entity
 public class Compte {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    private Beneficier beneficier;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column()
     private String type;
@@ -31,6 +32,9 @@ public class Compte {
     private Date date_creation;
 
     @Column()
-    private Boolean status;
+    private String status;
+
+    @OneToMany(mappedBy = "compte")
+    List<Beneficier> beneficier;
 
 }

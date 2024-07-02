@@ -1,8 +1,6 @@
 package com.bank.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,11 +13,18 @@ import lombok.Setter;
 @Entity
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column
     private String username;
+    @Column
     private Integer age;
+    @Column
     private Integer cin;
+    @Column
     private String genre;
+    @Column
     private String password;
+
+    q
 }

@@ -1,8 +1,5 @@
 package com.bank.Model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,12 +14,13 @@ import java.util.List;
 @Entity
 public class Beneficier {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String username;
     private String bank;
     private Integer Account_number;
 
-    @OneToMany
-    private List<Compte> compteList;
+    @ManyToOne
+    @JoinColumn(name = "compte_id")
+    private Compte compte;
 }

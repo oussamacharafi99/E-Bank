@@ -1,4 +1,5 @@
 package com.bank.Model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,12 +34,15 @@ public class Compte {
     private User user;
 
     @OneToMany(mappedBy = "compte")
+    @JsonIgnore
     List<Beneficier> listOfBeneficier;
 
     @OneToMany(mappedBy = "compte")
+    @JsonIgnore
     List<Transaction> listOfTransactions;
 
     @OneToMany(mappedBy = "compte")
+    @JsonIgnore
     List<Carte> listOfCarte;
 
 }

@@ -1,5 +1,6 @@
 package com.bank.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,13 +23,14 @@ public class User {
     @Column
     private Integer age;
     @Column
-    private Integer cin;
+    private String cin;
     @Column
     private String genre;
     @Column
     private String password;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Compte> comptes;
 
 

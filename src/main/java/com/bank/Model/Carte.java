@@ -19,9 +19,6 @@ public class Carte {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "compte_id")
-    private Compte compte;
 
     @Column
     private Integer carte_numero;
@@ -34,6 +31,11 @@ public class Carte {
 
     @Column
     private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "compte_id")
+    private Compte compte;
+
 
 
 }

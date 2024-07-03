@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -26,5 +28,8 @@ public class User {
     @Column
     private String password;
 
-    q
+    @OneToMany(mappedBy = "user")
+    private List<Compte> comptes;
+
+
 }

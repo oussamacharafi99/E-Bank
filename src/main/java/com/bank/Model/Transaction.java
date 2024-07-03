@@ -18,18 +18,9 @@ import java.util.Timer;
 @Entity
 public class Transaction {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column()
     private Integer id;
-
-    @ManyToOne
-    @JoinColumn
-    private Compte compte;
-
-    @ManyToOne
-    @JoinColumn
-    private Beneficier beneficier;
-
     @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date transactionDate;
@@ -49,5 +40,14 @@ public class Transaction {
 
     @Column
     private String bank_transaction;
+
+    @ManyToOne
+    @JoinColumn
+    private Compte compte;
+
+    @ManyToOne
+    @JoinColumn
+    private Beneficier beneficier;
+
 
 }

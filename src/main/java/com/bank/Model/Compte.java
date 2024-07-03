@@ -17,11 +17,6 @@ public class Compte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
     @Column()
     private String type;
 
@@ -33,8 +28,17 @@ public class Compte {
 
     @Column()
     private String status;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @OneToMany(mappedBy = "compte")
-    List<Beneficier> beneficier;
+    List<Beneficier> listOfBeneficier;
+
+    @OneToMany(mappedBy = "compte")
+    List<Transaction> listOfTransactions;
+
+    @OneToMany(mappedBy = "compte")
+    List<Carte> listOfCarte;
 
 }

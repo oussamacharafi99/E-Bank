@@ -16,8 +16,14 @@ public class Beneficier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column
     private String username;
+
+    @Column
     private String bank;
+
+    @Column
     private Integer Account_number;
 
     @ManyToOne

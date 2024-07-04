@@ -1,4 +1,5 @@
 package com.bank.Model;
+import com.bank.Enums.CompteType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Setter
@@ -19,16 +20,14 @@ public class Compte {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column()
-    private String type;
+    private CompteType type;
 
     @Column()
-    private String solde;
+    private Integer solde;
 
     @Column()
-    private Date date_creation;
+    private LocalDate date_creation;
 
-    @Column()
-    private String status;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -45,4 +44,10 @@ public class Compte {
     @JsonIgnore
     List<Carte> listOfCarte;
 
+    public Compte(CompteType type, Integer solde, LocalDate date_creation, User user) {
+        this.type = type;
+        this.solde = solde;
+        this.date_creation = date_creation;
+        this.user = user;
+    }
 }

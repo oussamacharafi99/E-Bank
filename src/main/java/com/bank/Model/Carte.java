@@ -1,5 +1,7 @@
 package com.bank.Model;
 
+import com.bank.Enums.CarteStatus;
+import com.bank.Enums.CarteType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,15 +29,14 @@ public class Carte {
     private Date date_expiration;
 
     @Column
-    private String carte_type;
+    private CarteType carte_type;
 
     @Column
-    private String status;
+    private CarteStatus status;
 
     @ManyToOne
     @JoinColumn(name = "compte_id")
     private Compte compte;
-
 
 
 }

@@ -1,5 +1,6 @@
 package com.bank.Model;
 
+import com.bank.Enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,7 +34,7 @@ public class Transaction {
     private Double montant;
 
     @Column()
-    private String type_transaction;
+    private TransactionType type_transaction;
 
     @Column()
     private String description_transaction;

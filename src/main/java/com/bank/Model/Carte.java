@@ -23,15 +23,17 @@ public class Carte {
 
 
     @Column
-    private Integer carte_numero;
+    private String carte_numero;
 
     @Column
     private Date date_expiration;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private CarteType carte_type;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private CarteStatus status;
 
     @ManyToOne

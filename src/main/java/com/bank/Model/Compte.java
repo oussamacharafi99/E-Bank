@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,13 +20,16 @@ public class Compte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column()
+    @Enumerated(EnumType.STRING)
     private CompteType type;
 
     @Column()
     private Integer solde;
 
     @Column()
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date_creation;
 
     @ManyToOne

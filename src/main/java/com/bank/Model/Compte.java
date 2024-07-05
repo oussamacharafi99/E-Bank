@@ -32,6 +32,10 @@ public class Compte {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date_creation;
 
+    @Column()
+    private Boolean status;
+
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -39,6 +43,8 @@ public class Compte {
     @OneToMany(mappedBy = "compte")
     @JsonIgnore
     List<Beneficier> listOfBeneficier;
+
+
 
     @OneToMany(mappedBy = "compte")
     @JsonIgnore

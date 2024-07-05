@@ -22,20 +22,25 @@ public class ServiceCompte {
     private RepositoryCarte repoCarte;
 
     public List<Compte> getComptes(){
-        return repoCompte.findAll();
+        return repoCompte.findAll().stream().filter(compte -> compte.getStatus().equals(true)).toList();
     }
+
     public Compte getCompteById(int id){
         return repoCompte.getById(id);
     }
+
     public void deleteCompteById(Integer id){
         repoCompte.deleteById(id);
     }
-    public Compte updateCompte(Integer id, Compte compte){
-        return repoCompte.save(compte);
+
+    public Compte closeCompte(Integer id){
+        Compte compteUp=getCompteById(id);
+        compteUp.setStatus(false);
+        return repoCompte.save(compteUp);
     }
 
-
     public Compte createCompte(Compte compte) {
+        compte.setStatus(true);
         Compte savedCompte = repoCompte.save(compte);
         createCarte(savedCompte);
         return savedCompte;

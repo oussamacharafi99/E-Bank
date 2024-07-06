@@ -47,4 +47,8 @@ public class BankController {
         return serviceCompte.closeCompte(id);
     }
 
+    @GetMapping("/getSolde/{id}")
+    public Integer getSoldeCompte(@PathVariable("id") Integer id) {
+        return serviceCompte.getSoldeById(id);
+    }
 }

@@ -22,7 +22,13 @@ public class ServiceCompte {
     private RepositoryCarte repoCarte;
 
     public List<Compte> getComptes(){
-        return repoCompte.findAll().stream().filter(compte -> compte.getStatus().equals(true)).toList();
+        return repoCompte.findAll().stream()
+        .filter(compte -> compte.getStatus()
+         .equals(true)).toList();
+    }
+
+    public Integer getSoldeById(Integer id){
+        return repoCompte.getSolde(id);
     }
 
     public Compte getCompteById(int id){
@@ -41,6 +47,7 @@ public class ServiceCompte {
 
     public Compte createCompte(Compte compte) {
         compte.setStatus(true);
+        compte.setAccountNumber(generateCarteNumero());
         Compte savedCompte = repoCompte.save(compte);
         createCarte(savedCompte);
         return savedCompte;

@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RepositoryCarte extends JpaRepository<Carte, Integer> {
+    Carte findCarteByIdAndCompte_Id(int id, int compte_id);
 }

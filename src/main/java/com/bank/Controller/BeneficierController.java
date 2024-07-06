@@ -29,5 +29,9 @@ public class BeneficierController {
     public Beneficier updateBeneficier(@RequestBody Beneficier beneficier ,@PathVariable Integer id){
         return serviceBeneficier.updateBeneficier(id, beneficier);
     }
+    @DeleteMapping("/delete/{id}")
+    public void deleteBeneficier(@PathVariable("id") Integer id){
+         serviceBeneficier.RemoveBeneficier(id);
+    }
 
 }

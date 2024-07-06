@@ -21,6 +21,9 @@ public class Compte {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column
+    private String accountNumber;
+
     @Column()
     @Enumerated(EnumType.STRING)
     private CompteType type;
@@ -43,8 +46,6 @@ public class Compte {
     @OneToMany(mappedBy = "compte")
     @JsonIgnore
     List<Beneficier> listOfBeneficier;
-
-
 
     @OneToMany(mappedBy = "compte")
     @JsonIgnore

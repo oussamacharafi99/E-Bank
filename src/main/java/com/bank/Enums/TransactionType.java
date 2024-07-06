@@ -1,6 +1,6 @@
 package com.bank.Enums;
 
 public enum TransactionType {
-    Debit,
-    Credit,
+    debit,
+    credit,
 }

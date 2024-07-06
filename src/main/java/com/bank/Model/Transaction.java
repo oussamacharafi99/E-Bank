@@ -7,10 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalTime;
 import java.util.Date;
-import java.util.Timer;
 
 @Setter
 @Getter
@@ -34,6 +32,7 @@ public class Transaction {
     private Double montant;
 
     @Column()
+    @Enumerated(EnumType.STRING)
     private TransactionType type_transaction;
 
     @Column()

@@ -29,7 +29,7 @@ public class Compte {
     private CompteType type;
 
     @Column()
-    private Integer solde;
+    private Double solde;
 
     @Column()
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -55,7 +55,7 @@ public class Compte {
     @JsonIgnore
     List<Carte> listOfCarte;
 
-    public Compte(CompteType type, Integer solde, LocalDate date_creation, User user) {
+    public Compte(CompteType type, Double solde, LocalDate date_creation, User user) {
         this.type = type;
         this.solde = solde;
         this.date_creation = date_creation;

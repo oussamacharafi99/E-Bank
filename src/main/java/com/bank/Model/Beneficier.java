@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Setter
 @Getter
 @NoArgsConstructor
@@ -24,9 +22,16 @@ public class Beneficier {
     private String bank;
 
     @Column
-    private Integer Account_number;
+    private String account_number;
 
     @ManyToOne
     @JoinColumn(name = "compte_id")
     private Compte compte;
+
+    public Beneficier(String username, String bank, String account_number, Compte compte) {
+        this.username = username;
+        this.bank = bank;
+        this.account_number = account_number;
+        this.compte = compte;
+    }
 }

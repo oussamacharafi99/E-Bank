@@ -18,8 +18,6 @@ public class BankController {
     ServiceUser serviceUser;
     @Autowired
     ServiceCompte serviceCompte;
-    @Autowired
-    ServiceBeneficier serviceBeneficier;
 
     @GetMapping("/user")
     public User getUser() {
@@ -44,19 +42,9 @@ public class BankController {
         return serviceCompte.getComptes();
     }
 
-
     @PutMapping("/compte/status/{id}")
     public Compte closeCompte(@PathVariable Integer id){
         return serviceCompte.closeCompte(id);
-    }
-
-
-
-    /**********************- Beneficier Section -***********************/
-
-    @PostMapping("/addbeneficier")
-    public Beneficier addBeneficier(@RequestBody Beneficier beneficier){
-        return serviceBeneficier.addBeneficier(beneficier);
     }
 
 }

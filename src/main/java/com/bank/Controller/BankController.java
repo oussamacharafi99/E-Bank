@@ -43,7 +43,7 @@ public class BankController {
     }
 
     @PutMapping("/compte/status/{id}")
-    public Compte closeCompte(@PathVariable Integer id){
+    public String closeCompte(@PathVariable Integer id){
         return serviceCompte.closeCompte(id);
     }
 

@@ -39,10 +39,18 @@ public class ServiceCompte {
         repoCompte.deleteById(id);
     }
 
-    public Compte closeCompte(Integer id){
-        Compte compteUp=getCompteById(id);
-        compteUp.setStatus(false);
-        return repoCompte.save(compteUp);
+    public String closeCompte(Integer id){
+        Compte compteUp = getCompteById(id);
+        if (compteUp.getSolde() >= 0 ){
+            compteUp.setStatus(false);
+            repoCompte.save(compteUp);
+            return "The account has been closed";
+        }
+        else {
+            compteUp.setStatus(true);
+            repoCompte.save(compteUp);
+            return "The account has not been closed because you have (-) in your account";
+        }
     }
 
     public Compte createCompte(Compte compte) {

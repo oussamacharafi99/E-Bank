@@ -1,17 +1,13 @@
 package com.bank;
 
 import com.bank.Model.Compte;
-import com.bank.Model.User;
 import com.bank.Service.ServiceCompte;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.ServiceConfigurationError;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class BankApplicationTests {
@@ -19,22 +15,42 @@ class BankApplicationTests {
 	@Autowired
 	ServiceCompte serviceCompte;
 
-//	@Test
-//	void savecompteTest() {
-//		User user = new User();
-//		user.setId(1);
-//		Compte compte = new Compte("se", 12, LocalDate.now(), user);
-//		assertEquals(new Compte(), );
-//	}
+	@Test
+	@Transactional
+	void testCreateCompte() {
+		Compte compte = new Compte();
+		compte.setSolde(1000.0);
 
+		Compte savedCompte = serviceCompte.createCompte(compte);
+		assertNotNull(savedCompte);
+		assertEquals(1000, savedCompte.getSolde());
+		assertNotNull(savedCompte.getAccountNumber());
+	}
 
-//	@Test
-//	void Test() {
-//		Integer a=7;
-//		Integer b=8;
-//		assertEquals(15,a+b);
-//
-//	}
+	@Test
+	@Transactional
+	void testCloseCompte() {
+		Compte compte = new Compte();
+		compte.setSolde(500.0);
 
+		Compte savedCompte = serviceCompte.createCompte(compte);
+		String result = serviceCompte.closeCompte(savedCompte.getId());
 
+		assertEquals("The account has been closed", result);
+		assertFalse(savedCompte.getStatus());
+	}
+
+	@Test
+	@Transactional
+	void testGetSoldeById() {
+		Compte compte = new Compte();
+		compte.setSolde(1500.0);
+
+		Compte savedCompte = serviceCompte.createCompte(compte);
+		Integer solde = serviceCompte.getSoldeById(savedCompte.getId());
+
+		assertEquals(1500, solde);
+	}
+
+	
 }

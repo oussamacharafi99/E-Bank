@@ -17,10 +17,6 @@ public class ServiceTransaction {
     @Autowired
     RepositoryCompte repositoryCompte;
 
-    public List<Transaction> getTransaction() {
-         return  repositoryTransaction.findAll();
-    }
-
     public List<Transaction> GetTransactionByAccount(Integer id) {
         return repositoryTransaction.findTransactionsByCompte_Id(id);
     }

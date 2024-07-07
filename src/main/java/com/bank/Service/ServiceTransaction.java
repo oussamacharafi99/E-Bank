@@ -21,18 +21,17 @@ public class ServiceTransaction {
          return  repositoryTransaction.findAll();
     }
 
-    public Transaction GetTransactionByAccount(int id) {
-        return repositoryTransaction.findById(id).orElseThrow();
+    public List<Transaction> GetTransactionByAccount(Integer id) {
+        return repositoryTransaction.findTransactionsByCompte_Id(id);
     }
 
     public String CreateTransaction(Transaction transaction) {
         if (transaction.getMontant() != null &&
                 transaction.getMontant() > 0 &&
-                transaction.getBeneficier() != null &&
-                transaction.getBeneficier().getId() != null) {
+                transaction.getBeneficier().getId() != null
+                && transaction.getCompte().getId() != null ) {
 
-            Compte compte = repositoryCompte.findById(transaction.getCompte().getId())
-                    .orElseThrow(() -> new IllegalArgumentException("Le compte spécifié est introuvable"));
+            Compte compte = repositoryCompte.findById(transaction.getCompte().getId()).orElseThrow();
 
             if (compte.getSolde() != null && compte.getSolde() > 0 && compte.getSolde() >= transaction.getMontant()) {
                 if (transaction.getType_transaction() == TransactionType.credit) {
@@ -43,13 +42,13 @@ public class ServiceTransaction {
                     return ("Type de transaction invalide");
                 }
                 repositoryCompte.save(compte);
-               repositoryTransaction.save(transaction);
+                repositoryTransaction.save(transaction);
                 return "Transaction Success";
             } else {
-               return "Le solde du compte est insuffisant ou nul";
+               return "Le solde du compte est insuffisant ou null";
             }
         } else {
-            return "Le montant de la transaction doit être supérieur à 0 et l'ID du bénéficiaire ne peut pas être nul";
+            return "Le montant de la transaction doit etre Superieur à 0 et l'ID du bénéficiaire ne peut pas etre null";
         }
     }
 }

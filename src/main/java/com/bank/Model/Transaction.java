@@ -49,5 +49,4 @@ public class Transaction {
     @JoinColumn
     private Beneficier beneficier;
 
-
 }

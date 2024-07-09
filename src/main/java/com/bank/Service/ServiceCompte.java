@@ -7,6 +7,8 @@ import com.bank.Repository.RepositoryCarte;
 import com.bank.Repository.RepositoryCompte;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.bank.Exeptions.AppExeption;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -21,10 +23,14 @@ public class ServiceCompte {
     @Autowired
     private RepositoryCarte repoCarte;
 
-    public List<Compte> getComptes(){
-        return repoCompte.findAll().stream()
-        .filter(compte -> compte.getStatus()
-         .equals(true)).toList();
+    public List<Compte> getComptes() throws AppExeption{
+        try {
+            return repoCompte.findAll().stream()
+                    .filter(compte -> compte.getStatus()
+                            .equals(true)).toList();
+        }catch(Exception e) {
+            throw new AppExeption("no valid comptes found");
+        }
     }
 
     public Integer getSoldeById(Integer id){
@@ -39,10 +45,13 @@ public class ServiceCompte {
         repoCompte.deleteById(id);
     }
 
+    @Transactional
     public String closeCompte(Integer id){
         Compte compteUp = getCompteById(id);
         if (compteUp.getSolde() >= 0 ){
             compteUp.setStatus(false);
+            List<Carte> cartes = repoCarte.findCartesByCompte_Id(compteUp.getId());
+            cartes.forEach(carte -> carte.setStatus(CarteStatus.blocked));
             repoCompte.save(compteUp);
             return "The account has been closed";
         }

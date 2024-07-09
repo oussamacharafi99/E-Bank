@@ -49,4 +49,14 @@ public class Transaction {
     @JoinColumn
     private Beneficier beneficier;
 
+    public Transaction(Date transactionDate, LocalTime transactionTimer, Double montant, TransactionType type_transaction, String description_transaction, String bank_transaction, Compte compte, Beneficier beneficier) {
+        this.transactionDate = transactionDate;
+        this.transactionTimer = transactionTimer;
+        this.montant = montant;
+        this.type_transaction = type_transaction;
+        this.description_transaction = description_transaction;
+        this.bank_transaction = bank_transaction;
+        this.compte = compte;
+        this.beneficier = beneficier;
+    }
 }

@@ -72,7 +72,7 @@ class BankApplicationTests {
 		Compte compte = serviceCompte.getCompteById(1);
 		Beneficier beneficier=serviceBeneficier.GetBeneficierById(1);
 		Transaction transaction = new Transaction(valueOf(LocalDate.now()),LocalTime.now(),10000.0,TransactionType.credit,"debit","cih",compte,beneficier);
-		String response=serviceTransaction.CreateTransaction(transaction);
+		String response=serviceTransaction.CreateTransaction(1 , transaction);
 		assertEquals("Le solde du compte est insuffisant ou null",response);
 
 	}

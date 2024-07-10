@@ -23,9 +23,9 @@ public class ServiceCompte {
     @Autowired
     private RepositoryCarte repoCarte;
 
-    public List<Compte> getComptes() throws AppExeption{
+    public List<Compte> getComptesById(Integer id) throws AppExeption{
         try {
-            return repoCompte.findAll().stream()
+            return repoCompte.findComptesByUser_Id(id).stream()
                     .filter(compte -> compte.getStatus()
                             .equals(true)).toList();
         }catch(Exception e) {

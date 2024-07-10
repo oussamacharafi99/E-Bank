@@ -38,9 +38,9 @@ public class BankController {
          serviceCompte.deleteCompteById(id);
     }
 
-    @GetMapping("/get_all_comptes")
-    public List<Compte> getAllComptes() throws AppExeption {
-        return serviceCompte.getComptes();
+    @GetMapping("/get_all_comptes/{id}")
+    public List<Compte> getAllComptes(@PathVariable Integer id) throws AppExeption {
+        return serviceCompte.getComptesById(id);
     }
 
     @PutMapping("/compte/status/{id}")

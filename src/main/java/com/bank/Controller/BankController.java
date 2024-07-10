@@ -1,4 +1,5 @@
 package com.bank.Controller;
+import com.bank.Exeptions.AppExeption;
 import com.bank.Model.Beneficier;
 import com.bank.Model.Compte;
 import com.bank.Model.User;
@@ -38,7 +39,7 @@ public class BankController {
     }
 
     @GetMapping("/get_all_comptes")
-    public List<Compte> getAllComptes() {
+    public List<Compte> getAllComptes() throws AppExeption {
         return serviceCompte.getComptes();
     }
 

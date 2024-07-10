@@ -13,9 +13,9 @@ public class TransactionController {
     @Autowired
     ServiceTransaction serviceTransaction;
 
-    @PostMapping("add")
-    public String addTransaction(@RequestBody Transaction transaction) {
-        return serviceTransaction.CreateTransaction(transaction);
+    @PostMapping("add/{id}")
+    public String addTransaction(@PathVariable Integer id , @RequestBody Transaction transaction) {
+        return serviceTransaction.CreateTransaction(id , transaction);
     }
 
     @GetMapping("/get/{id}")

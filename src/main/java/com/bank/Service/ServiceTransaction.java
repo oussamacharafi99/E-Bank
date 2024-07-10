@@ -21,13 +21,13 @@ public class ServiceTransaction {
         return repositoryTransaction.findTransactionsByCompte_Id(id);
     }
 
-    public String CreateTransaction(Transaction transaction) {
+    public String CreateTransaction(Integer id , Transaction transaction) {
         if (transaction.getMontant() != null &&
                 transaction.getMontant() > 0 &&
                 transaction.getBeneficier().getId() != null
-                && transaction.getCompte().getId() != null ) {
+                && id != null ) {
 
-            Compte compte = repositoryCompte.findById(transaction.getCompte().getId()).orElseThrow();
+            Compte compte = repositoryCompte.findById(id).orElseThrow();
 
             if (compte.getSolde() != null && compte.getSolde() > 0 && compte.getSolde() >= transaction.getMontant()) {
                 if (transaction.getType_transaction() == TransactionType.credit) {

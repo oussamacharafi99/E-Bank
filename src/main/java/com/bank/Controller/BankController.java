@@ -1,4 +1,5 @@
 package com.bank.Controller;
+import com.bank.DTO.CompteDto;
 import com.bank.Exeptions.AppExeption;
 import com.bank.Model.Beneficier;
 import com.bank.Model.Compte;
@@ -26,6 +27,8 @@ public class BankController {
     }
 
 
+
+
     /**********************- Account Section -***********************/
 
     @PostMapping("/add_compte")
@@ -38,9 +41,9 @@ public class BankController {
          serviceCompte.deleteCompteById(id);
     }
 
-    @GetMapping("/get_all_comptes")
-    public List<Compte> getAllComptes() throws AppExeption {
-        return serviceCompte.getComptes();
+    @GetMapping("/get_all_comptes/{id}")
+    public List<CompteDto> getAllComptes(@PathVariable("id") Integer id) throws AppExeption {
+        return serviceCompte.getComptesById(id);
     }
 
     @PutMapping("/compte/status/{id}")

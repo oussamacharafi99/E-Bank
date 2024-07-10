@@ -14,4 +14,6 @@ public interface RepositoryCompte extends JpaRepository<Compte, Integer> {
     Integer getSolde(@Param("id") Integer id);
 
 //    List<Compte> findCompteByUserIdAndStatusTrueAndSoldeIsNotNullAndSoldeGreaterThanEqual
+
+    List<Compte> findComptesByUser_Id(Integer id);
 }

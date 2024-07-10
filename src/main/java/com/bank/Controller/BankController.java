@@ -1,4 +1,5 @@
 package com.bank.Controller;
+import com.bank.DTO.CompteDto;
 import com.bank.Exeptions.AppExeption;
 import com.bank.Model.Beneficier;
 import com.bank.Model.Compte;
@@ -26,6 +27,8 @@ public class BankController {
     }
 
 
+
+
     /**********************- Account Section -***********************/
 
     @PostMapping("/add_compte")
@@ -39,7 +42,7 @@ public class BankController {
     }
 
     @GetMapping("/get_all_comptes/{id}")
-    public List<Compte> getAllComptes(@PathVariable Integer id) throws AppExeption {
+    public List<CompteDto> getAllComptes(@PathVariable("id") Integer id) throws AppExeption {
         return serviceCompte.getComptesById(id);
     }
 

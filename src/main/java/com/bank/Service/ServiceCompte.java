@@ -1,4 +1,5 @@
 package com.bank.Service;
+import com.bank.DTO.CompteDto;
 import com.bank.Enums.CarteStatus;
 import com.bank.Enums.CarteType;
 import com.bank.Model.Carte;
@@ -11,6 +12,7 @@ import com.bank.Exeptions.AppExeption;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -23,14 +25,27 @@ public class ServiceCompte {
     @Autowired
     private RepositoryCarte repoCarte;
 
-    public List<Compte> getComptesById(Integer id) throws AppExeption{
-        try {
-            return repoCompte.findComptesByUser_Id(id).stream()
-                    .filter(compte -> compte.getStatus()
-                            .equals(true)).toList();
-        }catch(Exception e) {
-            throw new AppExeption("no valid comptes found");
-        }
+    public List<CompteDto> getComptesById(Integer id){
+//            repoCompte.findComptesByUser_Id(id).stream()
+//                    .filter( compte -> compte.getStatus()
+//                            .equals(true)).toList();
+            List<CompteDto> compteDtoList = new ArrayList<>();
+            CompteDto compteDto = new CompteDto();
+            for(Compte c : repoCompte.findComptesByUser_Id(id)) {
+                if (c.getStatus().equals(true)) {
+                    compteDto.setId(c.getId());
+                    compteDto.setAccountNumber(c.getAccountNumber());
+                    compteDto.setSolde(c.getSolde());
+                    compteDto.setStatus(c.getStatus());
+                    compteDto.setType(c.getType());
+                    compteDto.setDate_creation(c.getDate_creation());
+                    compteDto.setId_user(c.getUser().getId());
+
+                    System.out.println("User id " + compteDto.getId_user());
+                    compteDtoList.add(compteDto);
+                }
+            }
+            return compteDtoList;
     }
 
     public Integer getSoldeById(Integer id){

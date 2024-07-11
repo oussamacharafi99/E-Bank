@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class ServiceUser {
     @Autowired
     RepositoryUser repoUser;
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
 
     public User getUser(Integer id) {
         return repoUser.findUserById(id);
@@ -21,7 +23,8 @@ public class ServiceUser {
     @Transactional
     public void addUser(SignupRequest signupRequest) {
         String username =signupRequest.username();
-        String hashedPassword =passwordEncoder.encode(signupRequest.password());
+        String hashedPassword = passwordEncoder.encode(signupRequest.password());
+        System.out.println("hashedPassword: " + hashedPassword + " username: " + username);
         String cin = signupRequest.cin();
         Integer age = signupRequest.age();
         String genre = signupRequest.genre();

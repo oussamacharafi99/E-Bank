@@ -3,10 +3,7 @@ package com.bank.Model;
 import com.bank.Enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +15,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 public class User implements UserDetails {
     @Id
@@ -36,8 +34,6 @@ public class User implements UserDetails {
     @Column
     private String genre;
 
-    @Column
-    private String email;
 
     @Column
     private String password;
@@ -46,20 +42,20 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<Compte> comptes;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return null;
     }
     @Override
     public String getUsername(){
-        return email;
+        return this.username;
     }
     @Override
     public String getPassword(){
-        return password;
+        return this.password;
     }
 
     @Override

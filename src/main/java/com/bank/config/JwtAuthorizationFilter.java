@@ -16,7 +16,7 @@ import java.io.IOException;
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authorizationToken=request.getHeader("Authorization");
+        String authorizationToken = request.getHeader("Authorization");
         if(authorizationToken!=null && authorizationToken.startsWith("Bearer ")){
             try {
                 String jwt=authorizationToken.substring(7);
@@ -28,7 +28,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
                 // Vous pouvez maintenant utiliser les claims pour obtenir des informations du JWT
                 String username = claims.getSubject();
-                ;
+
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         username, null, null);
                 SecurityContextHolder.getContext().setAuthentication(authentication);

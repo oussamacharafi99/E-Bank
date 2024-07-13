@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class ConfigSecurity {
+
     private final UserDetailsImpl userDetailsService;
 
     public ConfigSecurity(UserDetailsImpl userDetailsService) {
@@ -26,14 +27,15 @@ public class ConfigSecurity {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(expressionInterceptUrlRegistry ->
                         expressionInterceptUrlRegistry
-                                .requestMatchers("/signup").permitAll()
-                                .requestMatchers("/login").permitAll() // Permettre l'accès à l'endpoint /login
+                                .requestMatchers("/signup", "/login").permitAll()
+                                 // Permettre l'accès à l'endpoint /login
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->formLogin.disable()); // Désactiver le formulaire de login par défaut de Spring Security
